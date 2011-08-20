@@ -1,0 +1,26 @@
+= ImageMap.js =
+
+For now, just open index.html in your browser. If you want another image file, change the IMG tag with
+your desired photo.
+
+= TODO =
+
+- carregar imagem com regiões visíveis e resto desfocado
+  raphael js: criar ellipses nas regiões e resto desfocado
+  canvas: http://roberto.open-lab.com/2011/02/04/lenscape-a-canvas-interaction-tutorial/
+- evento de mouseclick para criar regiões e taggear
+  raphael js: ???
+  canvas: http://sapandiwakar.wordpress.com/2011/06/05/using-html5-canvas-element-to-create-cool-tagging-interface/
+- evento de mousehover para mostrar tag em determinada região
+  raphael js: ???
+  canvas: idem anterior ou ImageTag de jQuery
+- evento de mousemove para simular lupa
+  raphael js: ???
+  canvas: http://roberto.open-lab.com/2011/02/04/lenscape-a-canvas-interaction-tutorial/
+
+== Extras ==
+
+- zoom e pan
+  raphael js: http://dashasalo.wordpress.com/2011/04/13/svg-image-zooming-and-panning-with-raphaeljs/  
+              http://jibbering.com/routeplanner/#
+

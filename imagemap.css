@@ -1,0 +1,129 @@
+body {
+    background: #333;
+    color: #fff;
+    font: 300 100.1% "Helvetica Neue", Helvetica, "Arial Unicode MS", Arial, sans-serif;
+}
+
+#copy {
+    bottom: 0;
+    font: 300 .7em "Helvetica Neue", Helvetica, "Arial Unicode MS", Arial, sans-serif;
+    position: absolute;
+    right: 1em;
+    text-align: right;
+}
+
+#copy a {
+    color: #fff;
+}
+
+#tag-wrapper {
+    border: 1px solid #ccc;
+    box-shadow: 0px 0px 10px #bbb;
+    -webkit-box-shadow: 0px 0px 10px #bbb;
+    -moz-box-shadow: 0px 0px 10px #bbb;
+    display: block;
+    padding: 10px;
+    position: relative;
+}
+
+#tag-target, #tag-wrapper img { 
+    cursor: crosshair; 
+}
+	
+#tag-wrapper img { 
+    position: absolute; 
+}
+	
+#tag-target {
+    display: none;
+    border: 4px solid #fff;
+    box-shadow: 0px 0px 20px #000;
+    -webkit-box-shadow: 0px 0px 20px #000;
+    -moz-box-shadow: 0px 0px 20px #000;
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 2;
+    background-color: rgba(255, 255, 255, 0.6);
+}
+	
+#tag-input {
+    background-color: rgba(0, 0, 0, 0.6);
+    display: none;
+    padding: 25px;
+    position: absolute;
+    
+    width: 150px;
+    z-index: 2;
+}
+	
+#tag-input label {
+    display: block;
+
+}
+		
+#tag-input input {
+    border: 1px solid #ccc;
+    color: #888;
+    display: block;
+    margin: 5px 0px;
+    outline: 0px;
+    padding: 3px;
+    width: 124px;
+}
+	
+.hotspot {
+    border: 4px solid #fff;
+    box-shadow: 0px 0px 20px #000;
+    -webkit-box-shadow: 0px 0px 20px #000;
+    -moz-box-shadow: 0px 0px 20px #000;
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.6);
+}
+	
+.hotspot:hover, .hotspothover {
+    border: 4px solid #fff;
+    box-shadow: 0px 0px 40px #fff;
+    -webkit-box-shadow: 0px 0px 40px #fff;
+    -moz-box-shadow: 0px 0px 40px #fff;
+    z-index: 1;
+}
+		
+.hotspot span { 
+    display: none; 
+}
+
+.hotspot:hover span, .hotspothover span {
+    color: #000;
+    display: block;
+    background: transparent;
+    font-weight: bold;
+    padding: 0;
+    text-align: center;
+}
+
+.remove { 
+    color: #748950; 
+    cursor: pointer; 
+    text-decoration: underline; 
+}
+
+#map {
+    width:100%;
+    height: 600px;
+    border:1px solid #666;
+    overflow:hidden;
+}
+
+#map img { 
+    border:none; 
+}
+
+a { 
+    color:gray; 
+    font-size:11px; 
+}
