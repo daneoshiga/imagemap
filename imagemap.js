@@ -7,6 +7,8 @@
 // - http://www.nealgrosskopf.com/tech/resources/62/
 // "possibly in the future"
 // http://www.spiceupyourblog.com/2010/05/blurred-image-effect-blogger.html
+// this demo is amazing o.O
+// http://tutorialzine.com/2010/02/photo-shoot-css-jquery/
 
 var targetX, targetY;
 var tagCounter = 0;
