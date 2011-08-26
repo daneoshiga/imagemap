@@ -3,7 +3,10 @@
 // Based on these works:
 // - http://hitconsultants.com/dragscroll_scrollsync/scrollpane.html
 // - http://code.google.com/p/jquery-scrollview (MIT License) - Toshimitsu Takahashi
+// - http://www.nealgrosskopf.com/tech/thread.php?pid=62
 // - http://www.nealgrosskopf.com/tech/resources/62/
+// "possibly in the future"
+// http://www.spiceupyourblog.com/2010/05/blurred-image-effect-blogger.html
 
 var targetX, targetY;
 var tagCounter = 0;
