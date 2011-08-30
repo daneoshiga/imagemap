@@ -47,7 +47,7 @@ body{
 	overflow:hidden;
 	position:absolute;
 	right:20px;
-	width:490px;
+	width:1000px;
 }
 
 .album .slide{
@@ -55,7 +55,6 @@ body{
 	width:700px;
 	height:110px;
 	position:relative;
-	left:-210px;
 }
 
 /* The styles below are only necessary for the styling of the demo page: */

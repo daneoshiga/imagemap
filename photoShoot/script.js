@@ -63,6 +63,12 @@ $(document).ready(function(){
 	}
 
 	function addshoot(position) {
+	    //position.height, position.width = viewFinder opts
+	    //position.left, position.top = margintop and marginleft that is needed
+
+	    //This function adds new shot images to page, the idea is being able to
+	    //use it not only from onClick action on photoShoot, but also grabbing
+	    //data from elsewhere
 		// Creating a new shot image:
 		var newShot = $('<div class="shot">').width(150).height(100);
         
@@ -90,17 +96,19 @@ $(document).ready(function(){
 		var marginleft = position.left;
         
         var foto = [{
-            "imagem":bg.url,
-            "x":bg.size.x,
-            "y":bg.size.y,
-            "margintop":position.top,
-            "marginleft":marginleft
+            "imagem" : bg.url,
+            "bgx"    : bg.size.x,
+            "bgy"    : bg.size.y,
+            "height" : position.height,
+            "width"  : position.width,
+            "top"    : position.top,
+            "left"   : marginleft
         }];
+
+        //FIXME turn this on a ajax post
+        console.log(foto);
 
         return newShot;
     }
         
-    //FIXME turn this on a ajax post
-    //console.log(foto);
-
 });
