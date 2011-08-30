@@ -12,10 +12,7 @@ $(document).ready(function(){
 	// Creating an array with four possible backgrounds and their sizes:
 	
 	var pics = new Array(						 
-							{ url:'http://farm4.static.flickr.com/3595/3405361333_77f2a5e731_b.jpg', size:{x:1024,y:677}},
-							{ url:'http://farm4.static.flickr.com/3028/2753126743_4249a4e948_b.jpg', size:{x:1024,y:768}},
-							{ url:'http://farm4.static.flickr.com/3641/3595250019_5a1237899a_b.jpg', size:{x:1024,y:768}},
-							{ url:'http://farm3.static.flickr.com/2592/4018062274_1f7f23597d_o.jpg', size:{x:1158,y:756}}
+							{ url:'../crowdbig2.jpg', size:{x:4370,y:2913}}
 	);
 	
 	// Choosing a random picture to be passed to the PhotoShoot jQuery plug-in:
