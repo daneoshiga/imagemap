@@ -39,25 +39,19 @@ $(document).ready(function(){
 	
 	function shoot(position){
 		// This function is called by the plug-in when the button is pressed
+		// FIXME show the "shoots" on the same place it was made (minimal)
+		// FIXME when shoot, show input, so the "tagger" can add a note, this
+		// FIXME add message on alt from image
+		// note will be sent with json, with place info
 		
 		// Setting the overlay's div to white will create the illusion of a camera flash:
 		main.find('.overlay').css('background-color','white');
 		
 		// The flash will last for 100 milliseconds (a tenth of the second):
 		setTimeout(function(){main.find('.overlay').css('background-color','')},100);
-		
-		// Creating a new shot image:
-		var newShot = $('<div class="shot">').width(150).height(100);
+	    
+	    newShot = addshoot(position);
 
-		newShot.append( $('<img src="'+bg.url+'" width="'+(bg.size.x/2)+'" height="'+(bg.size.y/2)+'" />').css('margin',-position.top*0.5+'px 0 0 -'+position.left*0.5+'px') );
-
-		var margintop = position.top;
-		var marginleft = position.left;
-        
-        var foto = [{"imagem":bg.url,"x":bg.size.x,"y":bg.size.y,"margintop":position.top,"marginleft":marginleft}];
-
-        //FIXME turn this on a ajax post
-        console.log(foto);
 
 		// Removing the fourth shot (the count starts from 0):
 		$('.shot').eq(3).remove();
@@ -65,7 +59,48 @@ $(document).ready(function(){
 		// Adding the newly created shot to the album div, but moved 160px to the right.
 		// We start an animation to slide it in view:
 		
-		newShot.css('margin-right',-160).prependTo('.album .slide').animate({marginRight:0},'slow');	
+		newShot.css('margin-right',-160).prependTo('.album .slide').animate({marginRight:0},'slow');
 	}
+
+	function addshoot(position) {
+		// Creating a new shot image:
+		var newShot = $('<div class="shot">').width(150).height(100);
+        
+        var shot = $(
+                '<img src="'+bg.url+'"'+
+                ' width="'+(bg.size.x/2)+'"'+
+                ' height="'+(bg.size.y/2)+'"'+
+                ' />'
+                ).css({
+                    'margin-top' : -position.top*0.5+'px',
+                    'margin-left': -position.left*0.5+'px'
+                })
+
+		newShot.append(shot);
+
+        var tagger = 
+            '<div id="tag-input">'+
+                '<label for="tag-name">Marque essa região</label>'+
+                '<input type="text" id="tag-name">'+
+                '<button type="submit">Marcar</button>'+
+                '<button type="reset">Sair</button>'+
+            '</div>';
+
+		var margintop = position.top;
+		var marginleft = position.left;
+        
+        var foto = [{
+            "imagem":bg.url,
+            "x":bg.size.x,
+            "y":bg.size.y,
+            "margintop":position.top,
+            "marginleft":marginleft
+        }];
+
+        return newShot;
+    }
+        
+    //FIXME turn this on a ajax post
+    //console.log(foto);
 
 });
