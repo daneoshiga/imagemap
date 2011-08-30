@@ -15,9 +15,7 @@ $(document).ready(function(){
 							{ url:'../crowdbig2.jpg', size:{x:4370,y:2913}}
 	);
 	
-	// Choosing a random picture to be passed to the PhotoShoot jQuery plug-in:
-	
-	var bg = pics[parseInt(Math.random()*4)];
+	var bg = pics[0];
 	
 	// Creating an options object (try tweeking the variables):
 	
@@ -51,7 +49,14 @@ $(document).ready(function(){
 		var newShot = $('<div class="shot">').width(150).height(100);
 
 		newShot.append( $('<img src="'+bg.url+'" width="'+(bg.size.x/2)+'" height="'+(bg.size.y/2)+'" />').css('margin',-position.top*0.5+'px 0 0 -'+position.left*0.5+'px') );
-		
+
+		var margintop = position.top;
+		var marginleft = position.left;
+        
+        var foto = [{"imagem":bg.url,"x":bg.size.x,"y":bg.size.y,"margintop":position.top,"marginleft":marginleft}];
+
+        console.log(foto);
+
 		// Removing the fourth shot (the count starts from 0):
 		$('.shot').eq(3).remove();
 		
