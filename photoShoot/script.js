@@ -20,6 +20,7 @@ $(document).ready(function(){
 	// Creating an options object (try tweeking the variables):
 	
 	var opts = {
+        viewFinder	:	{ width:150, height:100, img:'' },
 		image		:	bg.url,
 		onClick		:	shoot,
 		opacity		:	0.8,
@@ -55,6 +56,7 @@ $(document).ready(function(){
         
         var foto = [{"imagem":bg.url,"x":bg.size.x,"y":bg.size.y,"margintop":position.top,"marginleft":marginleft}];
 
+        //FIXME turn this on a ajax post
         console.log(foto);
 
 		// Removing the fourth shot (the count starts from 0):
