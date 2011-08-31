@@ -60,6 +60,10 @@ $(document).ready(function(){
 		// The flash will last for 100 milliseconds (a tenth of the second):
 		setTimeout(function(){main.find('.overlay').css('background-color','')},100);
 		
+		console.log(position);
+		dialog.dialog("option",
+		        "position",
+		        [position.left+50,position.top+100]);
 		dialog.dialog("open");
 	    
 	    newShot = addshoot(position);
