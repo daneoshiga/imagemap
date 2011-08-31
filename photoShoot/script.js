@@ -3,20 +3,16 @@ $(document).ready(function(){
 
 	// Assigning the jQuery object to a variable for speed:
 	var main = $('#main');	
+    var dialog = $("#dialog");
 
 	// Setting the width of the photoshoot area to 
 	// 1024 px or the width of the document - whichever is smallest:
 	
 	main.width(Math.min(1024,$(document).width()));
 	
-	// Creating an array with four possible backgrounds and their sizes:
-	
-	var pics = new Array(						 
-							{ url:'../crowdbig2.jpg', size:{x:4370,y:2913}}
-	);
-	
-	var bg = pics[0];
-	
+	// adding image in background with it's size 
+	var bg = { url:'../crowdbig2.jpg', size:{x:4370,y:2913}};
+
 	// Creating an options object (try tweeking the variables):
 	
 	var opts = {
@@ -34,13 +30,18 @@ $(document).ready(function(){
 	// Adding the album holder to the stage:
 	$('<div class="album">').html('<div class="slide" />').appendTo('#photoalbum');
 
-    var dialog = $("#dialog");
-
     dialog.dialog({
-        autoOpen: false
+        autoOpen    : false,
+        buttons: {
+            "Marcar" : function(){},
+            "Sair"   : function(){
+                $(this).dialog("close");
+            },
+        }
     });
 
     dialog.append(
+            'Marque essa região'+
             '<input type="text"></input>'
             );
 
@@ -58,9 +59,10 @@ $(document).ready(function(){
 		
 		// The flash will last for 100 milliseconds (a tenth of the second):
 		setTimeout(function(){main.find('.overlay').css('background-color','')},100);
+		
+		dialog.dialog("open");
 	    
 	    newShot = addshoot(position);
-
 
 		// Removing the fourth shot (the count starts from 0):
 		$('.shot').eq(3).remove();
@@ -69,7 +71,6 @@ $(document).ready(function(){
 		// We start an animation to slide it in view:
 		
 		newShot.css('margin-right',-160).prependTo('.album .slide').animate({marginRight:0},'slow');
-		$("#dialog").dialog("open");
 	}
 
 	function addshoot(position) {
@@ -93,14 +94,6 @@ $(document).ready(function(){
                 })
 
 		newShot.append(shot);
-
-        var tagger = 
-            '<div id="tag-input">'+
-                '<label for="tag-name">Marque essa região</label>'+
-                '<input type="text" id="tag-name">'+
-                '<button type="submit">Marcar</button>'+
-                '<button type="reset">Sair</button>'+
-            '</div>';
 
 		var margintop = position.top;
 		var marginleft = position.left;
