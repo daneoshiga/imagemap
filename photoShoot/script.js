@@ -34,6 +34,15 @@ $(document).ready(function(){
 	// Adding the album holder to the stage:
 	$('<div class="album">').html('<div class="slide" />').appendTo('#photoalbum');
 
+    var dialog = $("#dialog");
+
+    dialog.dialog({
+        autoOpen: false
+    });
+
+    dialog.append(
+            '<input type="text"></input>'
+            );
 
 	// Our own shoot function (it is passed as onClick to the options array above):
 	
@@ -60,6 +69,7 @@ $(document).ready(function(){
 		// We start an animation to slide it in view:
 		
 		newShot.css('margin-right',-160).prependTo('.album .slide').animate({marginRight:0},'slow');
+		$("#dialog").dialog("open");
 	}
 
 	function addshoot(position) {
@@ -70,7 +80,7 @@ $(document).ready(function(){
 	    //use it not only from onClick action on photoShoot, but also grabbing
 	    //data from elsewhere
 		// Creating a new shot image:
-		var newShot = $('<div class="shot">').width(150).height(100);
+		var newShot = $('<div class="shot"></div>').width(150).height(100);
         
         var shot = $(
                 '<img src="'+bg.url+'"'+
@@ -82,6 +92,7 @@ $(document).ready(function(){
                     'margin-left': -position.left*0.5+'px'
                 })
 
+		newShot.append(shot);
 
         var tagger = 
             '<div id="tag-input">'+
@@ -91,8 +102,6 @@ $(document).ready(function(){
                 '<button type="reset">Sair</button>'+
             '</div>';
 
-		newShot.append(tagger);
-		newShot.append(shot);
 		var margintop = position.top;
 		var marginleft = position.left;
         
