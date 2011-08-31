@@ -31,13 +31,7 @@ $(document).ready(function(){
 	$('<div class="album">').html('<div class="slide" />').appendTo('#photoalbum');
 
     dialog.dialog({
-        autoOpen    : false,
-        buttons: {
-            "Marcar" : function(){},
-            "Sair"   : function(){
-                $(this).dialog("close");
-            },
-        }
+        autoOpen    : false
     });
 
     dialog.append(
@@ -60,11 +54,10 @@ $(document).ready(function(){
 		// The flash will last for 100 milliseconds (a tenth of the second):
 		setTimeout(function(){main.find('.overlay').css('background-color','')},100);
 		
-		console.log(position);
 		dialog.dialog("option",
 		        "position",
 		        [position.left+50,position.top+100]);
-		dialog.dialog("open");
+
 	    
 	    newShot = addshoot(position);
 
@@ -112,8 +105,12 @@ $(document).ready(function(){
             "left"   : marginleft
         }];
 
-        //FIXME turn this on a ajax post
-        console.log(foto);
+        dialog.dialog( "option", "buttons", { 
+            //TODO change this console.log to a send data function
+            "Marcar": function() { console.log(foto); } ,
+            "Sair": function() { $(this).dialog("close"); }
+        } );
+		dialog.dialog("open");
 
         return newShot;
     }
