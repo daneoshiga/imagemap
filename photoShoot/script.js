@@ -32,7 +32,7 @@ $(document).ready(function(){
 	main.photoShoot(opts);
 
 	// Adding the album holder to the stage:
-	$('<div class="album">').html('<div class="slide" />').appendTo(main);
+	$('<div class="album">').html('<div class="slide" />').appendTo('#photoalbum');
 
 
 	// Our own shoot function (it is passed as onClick to the options array above):
@@ -82,7 +82,6 @@ $(document).ready(function(){
                     'margin-left': -position.left*0.5+'px'
                 })
 
-		newShot.append(shot);
 
         var tagger = 
             '<div id="tag-input">'+
@@ -92,6 +91,8 @@ $(document).ready(function(){
                 '<button type="reset">Sair</button>'+
             '</div>';
 
+		newShot.append(tagger);
+		newShot.append(shot);
 		var margintop = position.top;
 		var marginleft = position.left;
         
