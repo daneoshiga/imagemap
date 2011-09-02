@@ -17,15 +17,131 @@
             border: 1px solid #444;
             color: #fff;   /* text color for messages */
         }
+        #output {
+            width: 500px;
+            border: none;
+            margin: 1em 0em;
+        }
+        #output td {
+            width: 50%;
+        }
+        #output .outputLabel {
+            font-weight: bold;
+        }
+        .overlay {
+            border: 1px solid white;
+        }
+    </style>
     </style>
 </head>
 <body>
     <h1>Testando Seadragon Ajax</h1>
+    <table id="output">
+      <tr>
+        <th class="name"> </th>
+        <th class="value">Pixels</th>
+
+        <th class="value">Points</th>
+      </tr>
+      <tr>
+        <th>Mouse position</th>
+
+        <td id="mousePixels">-</td>
+        <td id="mousePoints">-</td>
+      </tr>
+      <tr>
+
+        <th>Viewport dimensions</th>
+        <td id="viewportSizePixels">-</td>
+        <td id="viewportSizePoints">-</td>
+
+      </tr>
+    </table>
     <div id="container"></div>
     <script src="seadragon-dev.js"></script>
     <script>
+        var PRECISION = 2;   // number of decimal places
         var viewer = new Seadragon.Viewer("container");
+
+        viewer.addEventListener("open", addOverlays);
+
         viewer.openDzi("img1.dzi");
+
+        viewer.addEventListener("open", showViewport);
+        viewer.addEventListener("animation", showViewport);
+        Seadragon.Utils.addEvent(viewer.elmt, "mousemove", showMouse);
+
+        function addOverlays(viewer) {
+            var img = document.createElement("img");
+            var point = new Seadragon.Point( 
+            0.6479860647626986, 0.21632549161594064);
+
+            var placement = Seadragon.OverlayPlacement.BOTTOM;
+
+            img.src = "pushpin.gif";
+            viewer.drawer.addOverlay(img, point, placement);
+
+            var div = document.createElement("div");
+            //makes a rect of 1x1 "points" starting on 0.8x0.9
+            var rect = new Seadragon.Rect(  
+            0.8, 0.9,
+            0.1, 0.1);
+
+            div.className = "overlay";
+            viewer.drawer.addOverlay(div, rect);
+        }
+
+        function showMouse(event) {
+            // getMousePosition() returns position relative to page,
+            // while we want the position relative to the viewer
+            // element. so subtract the difference.
+            var pixel = Seadragon.Utils.getMousePosition(event).minus
+            (Seadragon.Utils.getElementPosition(viewer.elmt));
+
+            document.getElementById("mousePixels").innerHTML
+            = toString(pixel, true);
+
+            if (!viewer.isOpen()) {
+                return;
+            }
+
+            var point = viewer.viewport.pointFromPixel(pixel);
+
+            document.getElementById("mousePoints").innerHTML
+            = toString(point, true);
+        }
+
+        function showViewport(viewer) {
+            if (!viewer.isOpen()) {
+                return;
+            }
+
+            var sizePoints = viewer.viewport.getBounds().getSize();
+            var sizePixels = viewer.viewport.getContainerSize();
+            // or = viewer.viewport.deltaPixelsFromPoints(sizePoints);
+
+            document.getElementById("viewportSizePoints").innerHTML
+            = toString(sizePoints, false);
+
+            document.getElementById("viewportSizePixels").innerHTML
+            = toString(sizePixels, false);
+        }
+
+        function toString(point, useParens) {
+            var x = point.x;
+            var y = point.y;
+
+            if (x % 1 || y % 1) {     // if not an integer,
+            x = x.toFixed(PRECISION); // then restrict number of
+            y = y.toFixed(PRECISION); // decimal places
+        }
+
+        if (useParens) {
+            return "(" + x + ", " + y + ")";
+            } else {
+            return x + " x " + y;
+        }
+    }
     </script>
 </body>
 </html>

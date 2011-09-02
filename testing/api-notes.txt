@@ -8,8 +8,6 @@ http://expression.microsoft.com/pt-br/gg413364
     moves.
 
 
-
-
 http://expression.microsoft.com/pt-br/gg413322
     Seadragon.Drawer class
 
