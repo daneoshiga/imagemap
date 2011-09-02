@@ -1,0 +1,7 @@
+http://expression.microsoft.com/pt-br/gg413322
+    Seadragon.Drawer class
+
+    addOverlay(elmt, rect): Adds the given HTML element as an overlay to the
+    content if it has not been added before. This overlay will scale with the content;
+
+    addOverlay(elmt, point, placement?): same as above, but will NOT scale
