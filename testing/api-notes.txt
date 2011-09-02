@@ -1,3 +1,15 @@
+http://expression.microsoft.com/pt-br/gg413364
+    The top-left of the image is always at the origin (0, 0) while the width of
+    the image is always 1. The height of the image is dependant on the aspect
+    ratio, so an image which is half as tall as it is wide will have a height
+    of 0.5.
+
+    as you pan and zoom around an image, the viewport – not the image – is what
+    moves.
+
+
+
+
 http://expression.microsoft.com/pt-br/gg413322
     Seadragon.Drawer class
 
@@ -5,3 +17,25 @@ http://expression.microsoft.com/pt-br/gg413322
     content if it has not been added before. This overlay will scale with the content;
 
     addOverlay(elmt, point, placement?): same as above, but will NOT scale
+
+    var div = document.createElement("div");
+    var rect = new Seadragon.Rect(  
+            0.15226931601316998, 0.11237404811046009,
+            0.1487579850430218, 0.06805920884321259);
+
+    div.className = "overlay";
+    viewer.drawer.addOverlay(div, rect);
+
+    the height and width of the "image" are always fractions of 1
+
+http://expression.microsoft.com/pt-br/gg413343
+    Seadragon.MouseTracker class
+
+    pressHandler    Function ( tracker, position )  Handler function for the
+    mouse button being pressed inside the target element.
+
+    clickHandler    Function ( tracker, position, quick, shift )    Handler
+    function for the mouse button being clicked inside the target element.
+
+    a 'perfect' feature for this application would be letting the user create a
+    rectangle to make the mark
