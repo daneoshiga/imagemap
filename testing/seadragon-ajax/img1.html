@@ -63,12 +63,17 @@
         var container = document.getElementById("container");
         var PRECISION = 2;   // number of decimal places
 
+        //avoid zooming on click
+        SeadragonConfig.zoomPerClick = 1;
+
         var tracker = new Seadragon.MouseTracker(container);
         var viewer = new Seadragon.Viewer("container");
 
         tracker.pressHandler = function(tracker, position) {
+            //takes point where click occured information and them draws a
+            //rectangle around that point
+
             var point = viewer.viewport.pointFromPixel(position);
-            console.log(point);
             var div = document.createElement("div");
             //makes a rect of 1x1 "points" starting on 0.8x0.9
             var rect = new Seadragon.Rect(  
@@ -82,6 +87,8 @@
         viewer.addEventListener("open", addOverlays);
 
         viewer.openDzi("img1.dzi");
+
+        //start tracking mouse
         tracker.setTracking(true);
 
         viewer.addEventListener("open", showViewport);
