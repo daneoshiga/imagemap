@@ -37,3 +37,16 @@ http://expression.microsoft.com/pt-br/gg413343
 
     a 'perfect' feature for this application would be letting the user create a
     rectangle to make the mark
+
+
+!!!IMPORTANTE!!!
+para pegar o ponto atual 'na imagem'
+var pixel = Seadragon.Utils.getMousePosition(event).minus(Seadragon.Utils.getElementPosition(viewer.elmt));
+var point = viewer.viewport.pointFromPixel(pixel);
+
+getMousePosition = posição relativa a página
+getElementPosition = posição do elemento
+
+diferença dos dois = posição relativa do elemento
+
+pointFromPixel = converte para pontos
