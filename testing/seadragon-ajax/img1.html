@@ -84,7 +84,6 @@
             viewer.drawer.addOverlay(div, rect);
 
         }
-        viewer.addEventListener("open", addOverlays);
 
         viewer.openDzi("img1.dzi");
 
@@ -95,25 +94,6 @@
         viewer.addEventListener("animation", showViewport);
         Seadragon.Utils.addEvent(viewer.elmt, "mousemove", showMouse);
 
-        function addOverlays(viewer) {
-            var img = document.createElement("img");
-            var point = new Seadragon.Point( 
-            0.6479860647626986, 0.21632549161594064);
-
-            var placement = Seadragon.OverlayPlacement.BOTTOM;
-
-            img.src = "pushpin.gif";
-            viewer.drawer.addOverlay(img, point, placement);
-
-            var div = document.createElement("div");
-            //makes a rect of 1x1 "points" starting on 0.8x0.9
-            var rect = new Seadragon.Rect(  
-            0.8, 0.9,
-            0.1, 0.1);
-
-            div.className = "overlay";
-            viewer.drawer.addOverlay(div, rect);
-        }
 
         function showMouse(event) {
             // getMousePosition() returns position relative to page,
