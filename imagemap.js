@@ -1,118 +1,116 @@
-// Imagemap.js - Lab Macambira 2011 - Transparência Hacker
-//
-// Based on these works:
-// - http://hitconsultants.com/dragscroll_scrollsync/scrollpane.html
-// - http://code.google.com/p/jquery-scrollview (MIT License) - Toshimitsu Takahashi
-// - http://www.nealgrosskopf.com/tech/thread.php?pid=62
-// - http://www.nealgrosskopf.com/tech/resources/62/
-// "possibly in the future"
-// http://www.spiceupyourblog.com/2010/05/blurred-image-effect-blogger.html
-// this demo is amazing o.O
-// http://tutorialzine.com/2010/02/photo-shoot-css-jquery/
+function () {
 
-var targetX, targetY;
-var tagCounter = 0;
+        var container = document.getElementById("container");
+        var PRECISION = 2;   // number of decimal places
 
-$(document).ready(function(){
-    $("#map").scrollview({
-        grab:"images/openhand.cur",
-        grabbing:"images/closedhand.cur"
-    });
+        //avoid zooming on click
+        SeadragonConfig.zoomPerClick = 1;
 
-    var $pancontainer=$('div.pancontainer')
-    $pancontainer.each(function(){
-	var $this=$(this).css({position:'relative', overflow:'hidden', cursor:'move'})
-	var $img=$this.find('img:eq(0)') //image to pan
-	var options={$pancontainer:$this, pos:$this.attr('data-orient'), curzoom:1, canzoom:$this.attr('data-canzoom'), wrappersize:[$this.width(), $this.height()]}
-	$img.imgmover(options)
-    });
-        
-    //Dynamically wrap image
-    $("img").wrap('<div id="tag-wrapper"></div>');
-	
-    //Dynamically size wrapper div based on image dimensions
-    $("#tag-wrapper").css({width: $("img").outerWidth(), height: $("img").outerHeight()});
-	
-    //Append #tag-target content and #tag-input content
-    $("#tag-wrapper").append('<div id="tag-target"></div><div id="tag-input"><label for="tag-name">Marque essa região</label><input type="text" id="tag-name"><button type="submit">Marcar</button><button type="reset">Sair</button></div>');
-	
-    //$("#tag-wrapper").click(function(e){
-    $("img").click(function(e){		
-	//Determine area within element that mouse was clicked
-	mouseX = e.pageX - $("#tag-wrapper").offset().left;
-	mouseY = e.pageY - $("#tag-wrapper").offset().top;
-		
-	//Get height and width of #tag-target
-	targetWidth = $("#tag-target").outerWidth();
-	targetHeight = $("#tag-target").outerHeight();
-	
-	//Determine position for #tag-target
-	targetX = mouseX-targetWidth/2;
-	targetY = mouseY-targetHeight/2;
-	
-	//Determine position for #tag-input
-	inputX = mouseX+targetWidth/2;
-	inputY = mouseY-targetHeight/2;
-	
-	//Animate if second click, else position and fade in for first click
-	if($("#tag-target").css("display")=="block")
-	{
-	    $("#tag-target").animate({left: targetX, top: targetY}, 500);
-	    $("#tag-input").animate({left: inputX, top: inputY}, 500);
-	} else {
-	    $("#tag-target").css({left: targetX, top: targetY}).fadeIn();
-	    $("#tag-input").css({left: inputX, top: inputY}).fadeIn();
-	}
-		
-	//Give input focus
-	$("#tag-name").focus();	
-    });
-	
-    //If cancel button is clicked
-    $('button[type="reset"]').click(function(){
-	closeTagInput();
-    });
-    
-    //If enter button is clicked within #tag-input
-    $("#tag-name").keyup(function(e) {
-	if(e.keyCode == 13) submitTag();
-    });	
-	
-    //If submit button is clicked
-    $('button[type="submit"]').click(function(){
-	submitTag();
-    });
+        var tracker = new Seadragon.MouseTracker(container);
+        var viewer = new Seadragon.Viewer("container");
 
-}); 
+        tracker.pressHandler = function(tracker, position) {
+            //takes point where click occured information and them draws a
+            //rectangle around that point
 
-function submitTag() {
-    tagValue = $("#tag-name").val();	
-    
-    //Adds a new list item below image. Also adds events inline since they are dynamically created after page load
-    $("#tag-wrapper").after('<p id="hotspot-item-' + tagCounter + '">' + tagValue + ' <span class="remove" onclick="removeTag(' + tagCounter + ')" onmouseover="showTag(' + tagCounter + ')" onmouseout="hideTag(' + tagCounter + ')">(Remove)</span></p>');
-	
-    //Adds a new hotspot to image
-    $("#tag-wrapper").append('<div id="hotspot-' + tagCounter + '" class="hotspot" style="left:' + targetX + 'px; top:' + targetY + 'px;"><span>' + tagValue + '</span></div>');
-    
-    tagCounter++;
-    closeTagInput();
-}
+            var point = viewer.viewport.pointFromPixel(position);
+            var div = document.createElement("div");
+            //makes a rect of 1x1 "points" starting on 0.8x0.9
+            var rect = new Seadragon.Rect(  
+            //TODO make these values configurable
+            point.x-0.025, point.y-0.025,
+            0.05, 0.05);
 
-function closeTagInput() {
-    $("#tag-target").fadeOut();
-    $("#tag-input").fadeOut();
-    $("#tag-name").val("");
-}
+            div.className = "overlay";
+            viewer.drawer.addOverlay(div, rect);
 
-function removeTag(i) {
-    $("#hotspot-item-"+i).fadeOut();
-    $("#hotspot-"+i).fadeOut();
-}
+            //TODO add here code for inputing comment 
+            console.log(point);
 
-function showTag(i) {
-    $("#hotspot-"+i).addClass("hotspothover");
-}
+        }
 
-function hideTag(i) {
-    $("#hotspot-"+i).removeClass("hotspothover");
-}
+        viewer.openDzi("img1.dzi");
+
+        //start tracking mouse
+        tracker.setTracking(true);
+
+
+        function markPoints(viewer) {
+            //function to test creating marks from the load moment
+
+            //TODO call a function to look for points data externally
+            //iterate throw these points, ploting to image
+            var pos = new Array();
+            pos.x = 0.85;
+            pos.y = 0.05;
+            if (!viewer.isOpen()) {
+                return;
+            }
+            var div = document.createElement("div");
+            var rect = new Seadragon.Rect(
+            pos.x-0.025, pos.y-0.025,
+            0.05, 0.05);
+
+            div.className = "overlay";
+            viewer.drawer.addOverlay(div, rect);
+
+        }
+
+        viewer.addEventListener("open", showViewport);
+        viewer.addEventListener("open", markPoints);
+        viewer.addEventListener("animation", showViewport);
+        Seadragon.Utils.addEvent(viewer.elmt, "mousemove", showMouse);
+
+
+        function showMouse(event) {
+            // getMousePosition() returns position relative to page,
+            // while we want the position relative to the viewer
+            // element. so subtract the difference.
+            var pixel = Seadragon.Utils.getMousePosition(event).minus
+            (Seadragon.Utils.getElementPosition(viewer.elmt));
+
+            document.getElementById("mousePixels").innerHTML
+            = toString(pixel, true);
+
+            if (!viewer.isOpen()) {
+                return;
+            }
+
+            var point = viewer.viewport.pointFromPixel(pixel);
+
+            document.getElementById("mousePoints").innerHTML
+            = toString(point, true);
+        }
+
+        function showViewport(viewer) {
+            if (!viewer.isOpen()) {
+                return;
+            }
+
+            var sizePoints = viewer.viewport.getBounds().getSize();
+            var sizePixels = viewer.viewport.getContainerSize();
+            // or = viewer.viewport.deltaPixelsFromPoints(sizePoints);
+
+            document.getElementById("viewportSizePoints").innerHTML
+            = toString(sizePoints, false);
+
+            document.getElementById("viewportSizePixels").innerHTML
+            = toString(sizePixels, false);
+        }
+
+        function toString(point, useParens) {
+            var x = point.x;
+            var y = point.y;
+
+            if (x % 1 || y % 1) {     // if not an integer,
+            x = x.toFixed(PRECISION); // then restrict number of
+            y = y.toFixed(PRECISION); // decimal places
+        }
+
+        if (useParens) {
+            return "(" + x + ", " + y + ")";
+            } else {
+            return x + " x " + y;
+        }
+    }
+}();
