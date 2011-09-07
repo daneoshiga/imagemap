@@ -34,7 +34,7 @@ tracker.pressHandler = function(tracker, position) {
 
     dialog.dialog("option",
             "position",
-            [position.left+50,position.top+100]);
+            [position.x,position.y]);
 
     dialog.dialog( "option", "buttons", { 
         //TODO change this console.log to a send data function
