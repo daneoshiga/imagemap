@@ -89,8 +89,26 @@
             div.className = "overlay";
             viewer.drawer.addOverlay(div, rect);
 
-            //TODO add here code for inputing comment 
-            console.log(point);
+            var dialog = $("#dialog");
+            dialog.dialog({
+                autoOpen    : false
+            });
+
+            dialog.append(
+            'Marque essa regi&atilde;o'+
+            '<input type="text"></input>'
+            );
+
+            dialog.dialog("option",
+            "position",
+            [position.left+50,position.top+100]);
+
+            dialog.dialog( "option", "buttons", { 
+                //TODO change this console.log to a send data function
+                "Marcar": function() { console.log(point); } ,
+                "Sair": function() { $(this).dialog("close"); }
+            } );
+            dialog.dialog("open");
 
         }
 
