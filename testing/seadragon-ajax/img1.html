@@ -73,6 +73,15 @@
 
         var tracker = new Seadragon.MouseTracker(container);
         var viewer = new Seadragon.Viewer("container");
+        var dialog = $("#dialog");
+        dialog.dialog({
+            autoOpen    : false
+        });
+
+        dialog.append(
+        'Marque essa regi&atilde;o'+
+        '<input type="text"></input>'
+        );
 
         tracker.pressHandler = function(tracker, position) {
             //takes point where click occured information and them draws a
@@ -86,18 +95,9 @@
             point.x-0.025, point.y-0.025,
             0.05, 0.05);
 
+            //TODO add to class overlay an hover action to display message
             div.className = "overlay";
             viewer.drawer.addOverlay(div, rect);
-
-            var dialog = $("#dialog");
-            dialog.dialog({
-                autoOpen    : false
-            });
-
-            dialog.append(
-            'Marque essa regi&atilde;o'+
-            '<input type="text"></input>'
-            );
 
             dialog.dialog("option",
             "position",
