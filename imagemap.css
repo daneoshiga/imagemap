@@ -1,9 +1,10 @@
-body {
-    background: #333;
-    color: #fff;
-    font: 300 100.1% "Helvetica Neue", Helvetica, "Arial Unicode MS", Arial, sans-serif;
+html {
+    font-family: Verdana, sans-serif;
 }
-
+body {
+    background-color: #333;
+    color: #fff;
+}
 #copy {
     bottom: 0;
     font: 300 .7em "Helvetica Neue", Helvetica, "Arial Unicode MS", Arial, sans-serif;
@@ -12,58 +13,21 @@ body {
     text-align: right;
 }
 
-#copy a {
-    color: #fff;
-}
-
-#tag-wrapper {
-    border: 1px solid #ccc;
-    box-shadow: 0px 0px 10px #bbb;
-    -webkit-box-shadow: 0px 0px 10px #bbb;
-    -moz-box-shadow: 0px 0px 10px #bbb;
-    display: block;
-    padding: 10px;
-    position: relative;
-}
-
-#tag-target, #tag-wrapper img { 
-    cursor: crosshair; 
-}
-	
-#tag-wrapper img { 
-    position: absolute; 
-}
-	
-#tag-target {
-    display: none;
-    border: 4px solid #fff;
-    box-shadow: 0px 0px 20px #000;
-    -webkit-box-shadow: 0px 0px 20px #000;
-    -moz-box-shadow: 0px 0px 20px #000;
-    height: 50px;
-    width: 50px;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    z-index: 2;
-    background-color: rgba(255, 255, 255, 0.6);
-}
-	
 #tag-input {
     background-color: rgba(0, 0, 0, 0.6);
     display: none;
     padding: 25px;
     position: absolute;
-    
+    font-size: 11pt;
     width: 150px;
     z-index: 2;
 }
-	
+
 #tag-input label {
     display: block;
 
 }
-		
+
 #tag-input input {
     border: 1px solid #ccc;
     color: #888;
@@ -73,7 +37,7 @@ body {
     padding: 3px;
     width: 124px;
 }
-	
+
 .hotspot {
     border: 4px solid #fff;
     box-shadow: 0px 0px 20px #000;
@@ -84,7 +48,7 @@ body {
     position: absolute;
     background-color: rgba(255, 255, 255, 0.6);
 }
-	
+
 .hotspot:hover, .hotspothover {
     border: 4px solid #fff;
     box-shadow: 0px 0px 40px #fff;
@@ -92,7 +56,7 @@ body {
     -moz-box-shadow: 0px 0px 40px #fff;
     z-index: 1;
 }
-		
+
 .hotspot span { 
     display: none; 
 }
@@ -112,18 +76,52 @@ body {
     text-decoration: underline; 
 }
 
-#map {
-    width:100%;
-    height: 600px;
-    border:1px solid #666;
-    overflow:hidden;
+#container {
+    width: 100%;
+    height: 500px;
+    background-color: #222;
+    border: 1px solid #444;
+    color: #fff;   /* text color for messages */
+}
+#output {
+    width: 500px;
+    border: none;
+    margin: 1em 0em;
+}
+#output td {
+    width: 50%;
+}
+#output .outputLabel {
+    font-weight: bold;
+}
+.overlay {
+    border: 1px solid white;
+    border-radius: 5px;
+    background: #000;
+    opacity: 0.5;
+}
+.overlay:hover {
+    background: #fff;
+    opacity: 0.65;
 }
 
-#map img { 
-    border:none; 
+a, a:visited, a:active {
+    color: #fff;
 }
 
-a { 
-    color:gray; 
-    font-size:11px; 
+a.simple, a.simple:visited, a.simple:active {
+    color: #fff;
+    background: #000;
+    padding: 10px;
+    text-decoration: none;
+}
+
+a.simple:hover {
+    background: #222;
+}
+
+i.note {
+    color: #eee;
+    font-size: 11pt;
+    float: right;
 }

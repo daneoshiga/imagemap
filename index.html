@@ -5,17 +5,42 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="content-style-type" content="text/css" /> 
     <meta http-equiv="content-script-type" content="text/javascript" /> 
-    <title>ImageMap v0.2</title>
-    <script src="jquery-1.6.2.min.js" type="text/javascript"></script>
-    <script src="jquery.scrollview.js" type="text/javascript"></script>
-    <script src="imagemap.js" type="text/javascript"></script>
 
+    <title>ImageMap</title>
+
+    <script src="./vendor/jquery-1.6.2.min.js" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="imagemap.css"/>
+    <script src="./vendor/seadragon-ajax/seadragon-dev.js" type="text/javascript"></script>
+    <script src="imagemap.js" type="text/javascript"></script>
   </head>
   <body>
-    <div id="map">
-      <img src="crowdbig2.jpg" />
-    </div>
-    <p id="copy">ImageMap v0.2 - Lab Macambira 2011 - Transparência Hacker</p>
+
+    <div id="container"></div>
+
+    <p>
+      Selecione a imagem:
+      
+      <a class="simple" href="#" onclick="switchTo(event,
+                                          './tiles/img1.dzi');">1</a>
+      
+      <a class="simple" href="#" onclick="switchTo(event,
+                                          './tiles/img2.dzi');">2</a>
+      
+      <a class="simple" href="#" onclick="switchTo(event,
+                                          './tiles/img3.dzi');">3</a>
+      
+      <a class="simple" href="#" onclick="switchTo(event,
+                                          './tiles/img4.dzi');">4</a>
+
+      <a class="simple" href="#" onclick="switchTo(event,
+                                          './tiles/img5.dzi');">5</a>
+      <a class="simple" href="#" onclick="switchTo(event,
+                                          './tiles/img6.dzi');">6</a>
+      <a class="simple" href="#" onclick="switchTo(event,
+                                          './tiles/img7.dzi');">7</a>
+      
+      <i class="note">Utilize o mouse para navegar pela imagem e scroll para zoom.</i>
+    </p>
+    <p id="copy">ImageMap v0.4 - <a href="http://labmacambira.sf.net">Lab Macambira</a> - <a href="http://thacker.com.br">Transparência Hacker</a> - 2011</p>
   </body>
 </html>

@@ -1,26 +1,46 @@
-= ImageMap.js =
+= ImageMap =
 
-For now, just open index.html in your browser. If you want another image file, change the IMG tag with
-your desired photo.
+== Installing and Using ==
 
-= TODO =
+Copy the following directories and files to your HTML page main path:
 
-- carregar imagem com regiões visíveis e resto desfocado
-  raphael js: criar ellipses nas regiões e resto desfocado
-  canvas: http://roberto.open-lab.com/2011/02/04/lenscape-a-canvas-interaction-tutorial/
-- evento de mouseclick para criar regiões e taggear
-  raphael js: ???
-  canvas: http://sapandiwakar.wordpress.com/2011/06/05/using-html5-canvas-element-to-create-cool-tagging-interface/
-- evento de mousehover para mostrar tag em determinada região
-  raphael js: ???
-  canvas: idem anterior ou ImageTag de jQuery
-- evento de mousemove para simular lupa
-  raphael js: ???
-  canvas: http://roberto.open-lab.com/2011/02/04/lenscape-a-canvas-interaction-tutorial/
+* vendor/        contains the included js libs (seajax and jquery)
+* tiles/         contains all the images for Diretas Já as tiles and DZI file
+* imagemap.css   do your CSS customizations in this file
+* imagemap.js    do your JS customizations in this file
 
-== Extras ==
+Edit your HTML file and add into the header:
 
-- zoom e pan
-  raphael js: http://dashasalo.wordpress.com/2011/04/13/svg-image-zooming-and-panning-with-raphaeljs/  
-              http://jibbering.com/routeplanner/#
+    <script src="./vendor/jquery-1.6.2.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="imagemap.css"/>
+    <script src="./vendor/seadragon-ajax/seadragon-dev.js" type="text/javascript"></script>
+    <script src="imagemap.js" type="text/javascript"></script>
 
+On some place into your HTML file, place this div:
+
+    <div id="container"> </div>
+
+== Creating new tiles ==
+
+To create new image tiles use the Python script on utils/:
+
+    python utils/seadragon.py -n tile_name image_file.jpg
+
+This will create tile_name.dzi and tile_name/ directory containing all the tiles
+for the image_file.jpg
+
+== Licenses ==
+
+ImageMap is distributed as GPLv3
+
+Seadragon Ajax 0.8.9 (build 64702 on 2011-01-28) is distributed under the 
+license agreement at: http://go.microsoft.com/fwlink/?LinkId=164943
+
+jQuery JavaScript Library v1.6.2
+Copyright 2011, John Resig
+Dual licensed under the MIT or GPL Version 2 licenses.
+http://jquery.org/license
+Includes Sizzle.js
+http://sizzlejs.com/
+Copyright 2011, The Dojo Foundation
+Released under the MIT, BSD, and GPL Licenses.
