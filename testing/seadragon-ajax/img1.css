@@ -19,6 +19,13 @@ body {
     background-color: #222;
     border: 1px solid #444;
     color: #fff;   /* text color for messages */
+	overflow:hidden;
+	cursor:url(../../photoShoot/photoShoot/blank.cur),default;
+	position:relative;
+}
+
+#container.googleChrome{
+	cursor: url(../../photoShoot/photoShoot/blank_google_chrome.cur),default;
 }
 
 #output {

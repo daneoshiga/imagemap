@@ -129,3 +129,50 @@ function toString(point, useParens) {
         return x + " x " + y;
     }
 }
+
+var settings = $.extend({
+    viewFinder	:	{ width:100, height:100, img:'../../photoShoot/photoShoot/viewfinder.png' },
+});
+
+settings.stage = { width:$("#container").width(), height:$("#container").height() };
+
+if(navigator.userAgent.indexOf('Chrome')!=-1)
+{
+    $("#container").addClass('googleChrome');
+}
+else if(navigator.userAgent.indexOf('MSIE')!=-1)
+{
+    $("#container").css('cursor','url(../../photoShoot/photoShoot/blank.cur), default');
+}
+
+var vf = $('<div class="viewFinder">').css({
+    width		:	settings.viewFinder.width+'px',
+    height		:	settings.viewFinder.height+'px'
+}).html('<img src="'+settings.viewFinder.img+'" width="'+settings.viewFinder.width+'" height="'+settings.viewFinder.height+'" />').appendTo($("#container"));
+
+var offSet = $('#container').offset();
+
+var n_left, n_top;
+
+$("#container").mousemove(function(e){
+
+    n_left = (e.pageX-offSet.left)-settings.viewFinder.width/2;
+    n_top = (e.pageY-offSet.top)-settings.viewFinder.height/2;
+
+    if(n_left<0 || n_top<0) return false;
+    if(n_left+settings.viewFinder.width >=settings.stage.width || n_top+settings.viewFinder.height >= settings.stage.height) return false;
+
+    vf.css({
+        left				: n_left,
+        top					: n_top,
+    });
+
+}).click(function(){
+
+    settings.onClick({
+        left	:	parseInt(vf.css('left')),
+        top		:	parseInt(vf.css('top')),
+        width	:	settings.viewFinder.width,
+        height	:	settings.viewFinder.height
+    });
+});
