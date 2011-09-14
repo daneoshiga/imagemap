@@ -16,7 +16,19 @@ function init() {
     ///////// popup
     $("#container").wrap('<div id="tag-wrapper"></div>');
     //Append #tag-target content and #tag-input content
-    $("#tag-wrapper").append('<div id="tag-input"><label for="tag-name">Marque essa região</label><input type="text" id="tag-name"><button type="submit">Marcar</button><!--<button type="reset">Sair</button>--></div>');
+    $("#tag-wrapper").append(
+            '<div id="tag-input">'+
+            'Marque essa região'+
+            '<label for="tag-name">Nome</label>'+
+            '<input type="text" id="tag-name">'+
+            '<label for="tag-descricao">Descri&ccedil;&atilde;o</label>'+
+            '<input type="text" id="tag-descricao">'+
+            '<label for="tag-birth">Nascimento</label>'+
+            '<input type="text" id="tag-nasc">'+
+            '<label for="tag-name">Foto</label>'+
+            '<input type="text" id="tag-foto">'+
+                '<button type="submit">Marcar</button><!--<button type="reset">Sair</button>--></div>'
+                );
 
 
     tracker.clickHandler = function(tracker, position, quick, shift) {
