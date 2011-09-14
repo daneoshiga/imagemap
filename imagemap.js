@@ -18,6 +18,7 @@ function init() {
     //Append #tag-target content and #tag-input content
     $("#tag-wrapper").append(
             '<div id="tag-input">'+
+            '<form id="tag-form">'+
             'Marque essa região'+
             '<label for="tag-name">Nome</label>'+
             '<input type="text" id="tag-name">'+
@@ -27,7 +28,8 @@ function init() {
             '<input type="text" id="tag-nasc">'+
             '<label for="tag-name">Foto</label>'+
             '<input type="text" id="tag-foto">'+
-                '<button type="submit">Marcar</button><!--<button type="reset">Sair</button>--></div>'
+                '<button type="submit">Marcar</button><!--<button type="reset">Sair</button>--></div>'+
+                '</form>'
                 );
 
 
