@@ -16,6 +16,10 @@ Edit your HTML file and add into the header:
     <script src="./vendor/seadragon-ajax/seadragon-dev.js" type="text/javascript"></script>
     <script src="imagemap.js" type="text/javascript"></script>
 
+Open imagemap.js and change these variables:
+* jsonurl        put the url from where the marks data will be loaded 
+* postmarks      url to post the new marks made
+
 On some place into your HTML file, place this div:
 
     <div id="container"> </div>

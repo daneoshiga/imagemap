@@ -8,6 +8,7 @@ function init() {
     var height = 0.05;                  // height of the mark
     var width = 0.05;                   // width of the mark
     var jsonurl = 'oldermarks.json';    // url of file to load previous marks json data
+    var postmarks = 'save.php';         // url to save the marks
     SeadragonConfig.zoomPerClick = 1;   //avoid zooming on click
 
     var tracker = new Seadragon.MouseTracker(container);
@@ -78,6 +79,7 @@ function init() {
 
         //TODO add function to deal with name, desc, birth and pic
         //TODO add function to send the mark to db (ajax?)
+        //$.post(postmarks, mark);
         markers.push(mark);
     }
 
