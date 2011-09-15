@@ -40,7 +40,6 @@ function init() {
         var y = $("#tag-y").val();
 
         createMark(x,y,$("#tag-name").val(),$("#tag-desc").val(),$("#tag-birth").val(),$("#tag-pic").val());
-        console.log(markers);
         return false;
     });
 
@@ -68,17 +67,22 @@ function init() {
                 'birth': birth,
                 'pic':   pic
         }
+
+        //TODO add function to deal with name, desc, birth and pic
+        //TODO add function to send the mark to db (ajax)
+
         markers.push(mark);
     }
 
     function loadMarks() {
 
-        var obj = $.parseJSON('[{"birth":"a","desc":"d","name":"n","pic":"p","x":"0.0745724118942731","y":"0.04301321585903085"},'+
-                               '{"birth":"a","desc":"d","name":"n","pic":"p","x":"0.0845724118942731","y":"0.05301321585903085"}]');
-
-        $.each(obj,function() {
-            createMark(this.x, this.y, this.name, this.desc, this.birth, this.pic);
+        $.getJSON('oldermarks.json', function(obj){
+            $.each(obj,function() {
+                createMark(this.x, this.y, this.name, this.desc, this.birth, this.pic);
+            });
+       
         });
+
     };
 
     viewer.addEventListener("open",loadMarks);
