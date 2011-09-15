@@ -39,6 +39,12 @@ function init() {
         var x = $("#tag-x").val();
         var y = $("#tag-y").val();
 
+        createMark(x,y,$("#tag-name").val(),$("#tag-desc").val(),$("#tag-birth").val(),$("#tag-pic").val());
+        console.log(markers);
+        return false;
+    });
+
+    function createMark(x, y, name, desc, birth, pic) {
         var div = document.createElement("div");
 
         var rect = new Seadragon.Rect(  
@@ -54,17 +60,16 @@ function init() {
         viewer.viewport.fitBounds(rect);
         viewer.viewport.ensureVisible();
         viewer.drawer.addOverlay(div, rect);
-        mark = {'x':    x,
-                'y':    y,
-                'name': $("#tag-name").val(),
-                'desc': $("#tag-desc").val(),
-                'birth':$("#tag-birth").val(),
-                'pic':  $("#tag-pic").val()
+
+        mark = {'x':     x,
+                'y':     y,
+                'name':  name,
+                'desc':  desc,
+                'birth': birth,
+                'pic':   pic
         }
         markers.push(mark);
-        return false;
-    });
-
+    }
 
     tracker.clickHandler = function(tracker, position, quick, shift) {
         // just if it's a quick click... if not, doesn't marks
