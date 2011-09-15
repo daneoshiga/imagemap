@@ -19,6 +19,8 @@ function init() {
     $("#tag-wrapper").append(
             '<div id="tag-input">'+
             '<form id="tag-form">'+
+            '<input type="hidden" name="tag-x" id="tag-x">'+
+            '<input type="hidden" name="tag-y" id="tag-y">'+
             'Marque essa região'+
             '<label for="tag-name">Nome</label>'+
             '<input type="text" id="tag-name">'+
@@ -32,6 +34,30 @@ function init() {
                 '</form>'
                 );
 
+    $('#tag-form').submit(function() {
+
+        var x = $("#tag-x").val();
+        var y = $("#tag-y").val();
+
+        var div = document.createElement("div");
+
+        var rect = new Seadragon.Rect(  
+            //TODO make these values configurable
+            x-0.025, y-0.025,
+            0.05, 0.05);
+
+        div.className = "overlay";
+        // adds mouse events to the marker
+        div.onmousehover = function () { markerOnHover(rect)};
+        div.onmouseclick = function () { markerOnClick(rect)};
+
+        viewer.viewport.fitBounds(rect);
+        viewer.viewport.ensureVisible();
+        viewer.drawer.addOverlay(div, rect);
+        markers.push(rect);
+        return false;
+    });
+
 
     tracker.clickHandler = function(tracker, position, quick, shift) {
         // just if it's a quick click... if not, doesn't marks
@@ -40,34 +66,15 @@ function init() {
             //rectangle around that point
 
             var point = viewer.viewport.pointFromPixel(position);
+            $('#tag-x').val(point.x);
+            $('#tag-y').val(point.y);
             var div = document.createElement("div");
-            var aspect = viewer.viewport.getAspectRatio();
-            var bounds = viewer.viewport.getBounds();
-            var aspectratio = bounds.width/bounds.height;
 
             if (point.x > 0 && point.x < 1 && point.y > 0) {
-                console.log(point);
-
-                //makes a rect of 1x1 "points" starting on 0.8x0.9
-                var rect = new Seadragon.Rect(  
-                        //TODO make these values configurable
-                        point.x-0.025, point.y-0.025,
-                        0.05, 0.05);
-
-                div.className = "overlay";
-                // adds mouse events to the marker
-                div.onmousehover = function () { markerOnHover(rect)};
-                div.onmouseclick = function () { markerOnClick(rect)};
-
-
-                viewer.viewport.fitBounds(rect);
-                viewer.viewport.ensureVisible();
-                viewer.drawer.addOverlay(div, rect);
                 //TODO add here code for inputing comment 
                 $("#tag-target").css({left: position.x, top: position.y}).fadeIn();
                 $("#tag-input").css({left: position.x, top: position.y}).fadeIn();
                 $("#tag-name").focus();	
-                markers.push(rect);
                 //alert(rect);
             }
         }
