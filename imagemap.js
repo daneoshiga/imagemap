@@ -98,29 +98,7 @@ function init() {
     tracker.setTracking(true);
 
 
-    function markPoints(viewer) {
-        //function to test creating marks from the load moment
-
-        //TODO call a function to look for points data externally
-        //iterate throw these points, ploting to image
-        var pos = new Array();
-        pos.x = 0.85;
-        pos.y = 0.05;
-        if (!viewer.isOpen()) {
-            return;
-        }
-            <!-- var div = document.createElement("div"); -->
-            <!-- var rect = new Seadragon.Rect( -->
-            <!-- pos.x-0.025, pos.y-0.025, -->
-            <!-- 0.05, 0.05); -->
-
-            <!-- div.className = "overlay"; -->
-            <!-- viewer.drawer.addOverlay(div, rect); -->
-
-    }
-
     viewer.addEventListener("open", showViewport);
-    viewer.addEventListener("open", markPoints);
     viewer.addEventListener("animation", showViewport);
     //        Seadragon.Utils.addEvent(viewer.elmt, "mousemove", showMouse);
 
