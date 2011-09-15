@@ -71,6 +71,18 @@ function init() {
         markers.push(mark);
     }
 
+    function loadMarks() {
+
+        var obj = $.parseJSON('[{"birth":"a","desc":"d","name":"n","pic":"p","x":"0.0745724118942731","y":"0.04301321585903085"},'+
+                               '{"birth":"a","desc":"d","name":"n","pic":"p","x":"0.0845724118942731","y":"0.05301321585903085"}]');
+
+        $.each(obj,function() {
+            createMark(this.x, this.y, this.name, this.desc, this.birth, this.pic);
+        });
+    };
+
+    viewer.addEventListener("open",loadMarks);
+
     tracker.clickHandler = function(tracker, position, quick, shift) {
         // just if it's a quick click... if not, doesn't marks
         if (quick == true) {
@@ -204,10 +216,6 @@ function init() {
     function hideTag(i) {
         $("#hotspot-"+i).removeClass("hotspothover");
     }
-
-
-
-
 
     // viewer = new Seadragon.Viewer("container");
     // viewer.openDzi("blue-marble.dzi");
