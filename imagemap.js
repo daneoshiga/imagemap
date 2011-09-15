@@ -2,14 +2,18 @@ var viewer = null;
 
 function init() {
     var container = document.getElementById("container");
-    var PRECISION = 2;   // number of decimal places
-    var markers = [];
+    var PRECISION = 2;                  // number of decimal places
+    var markers = [];                   // array to keep the marks
     var tagCounter = 0;
-    //avoid zooming on click
-    SeadragonConfig.zoomPerClick = 1;
+    var height = 0.05;                  // height of the mark
+    var width = 0.05;                   // width of the mark
+    var jsonurl = 'oldermarks.json';    // url of file to load previous marks json data
+    SeadragonConfig.zoomPerClick = 1;   //avoid zooming on click
 
     var tracker = new Seadragon.MouseTracker(container);
+
     viewer = new Seadragon.Viewer("container");
+    //removing control buttons
     viewer.clearControls();
 
 
@@ -35,21 +39,25 @@ function init() {
                 );
 
     $('#tag-form').submit(function() {
+        //handles the form submition, pass all values to function createMark
 
-        var x = $("#tag-x").val();
-        var y = $("#tag-y").val();
-
-        createMark(x,y,$("#tag-name").val(),$("#tag-desc").val(),$("#tag-birth").val(),$("#tag-pic").val());
+        createMark($("#tag-x").val(),
+                    $("#tag-y").val(),
+                    $("#tag-name").val(),
+                    $("#tag-desc").val(),
+                    $("#tag-birth").val(),
+                    $("#tag-pic").val()
+                    );
         return false;
     });
 
     function createMark(x, y, name, desc, birth, pic) {
+        //create the marks overlay
         var div = document.createElement("div");
 
         var rect = new Seadragon.Rect(  
-            //TODO make these values configurable
-            x-0.025, y-0.025,
-            0.05, 0.05);
+            x-width/2, y-height/2,
+            width, height);
 
         div.className = "overlay";
         // adds mouse events to the marker
@@ -69,20 +77,17 @@ function init() {
         }
 
         //TODO add function to deal with name, desc, birth and pic
-        //TODO add function to send the mark to db (ajax)
-
+        //TODO add function to send the mark to db (ajax?)
         markers.push(mark);
     }
 
     function loadMarks() {
 
-        $.getJSON('oldermarks.json', function(obj){
+        $.getJSON(jsonurl, function(obj){
             $.each(obj,function() {
                 createMark(this.x, this.y, this.name, this.desc, this.birth, this.pic);
             });
-       
         });
-
     };
 
     viewer.addEventListener("open",loadMarks);
@@ -94,16 +99,15 @@ function init() {
             //rectangle around that point
 
             var point = viewer.viewport.pointFromPixel(position);
+            //save point information on tag form
             $('#tag-x').val(point.x);
             $('#tag-y').val(point.y);
-            var div = document.createElement("div");
 
             if (point.x > 0 && point.x < 1 && point.y > 0) {
-                //TODO add here code for inputing comment 
+                //if is inside content (and not on container) show form
                 $("#tag-target").css({left: position.x, top: position.y}).fadeIn();
                 $("#tag-input").css({left: position.x, top: position.y}).fadeIn();
                 $("#tag-name").focus();	
-                //alert(rect);
             }
         }
     }
@@ -112,7 +116,6 @@ function init() {
 
     //start tracking mouse
     tracker.setTracking(true);
-
 
     viewer.addEventListener("open", showViewport);
     viewer.addEventListener("animation", showViewport);
