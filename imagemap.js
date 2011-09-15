@@ -24,13 +24,13 @@ function init() {
             'Marque essa região'+
             '<label for="tag-name">Nome</label>'+
             '<input type="text" id="tag-name">'+
-            '<label for="tag-descricao">Descri&ccedil;&atilde;o</label>'+
-            '<input type="text" id="tag-descricao">'+
+            '<label for="tag-desc">Descri&ccedil;&atilde;o</label>'+
+            '<input type="text" id="tag-desc">'+
             '<label for="tag-birth">Nascimento</label>'+
-            '<input type="text" id="tag-nasc">'+
-            '<label for="tag-name">Foto</label>'+
-            '<input type="text" id="tag-foto">'+
-                '<button type="submit">Marcar</button><!--<button type="reset">Sair</button>--></div>'+
+            '<input type="text" id="tag-birth">'+
+            '<label for="tag-pic">Foto</label>'+
+            '<input type="text" id="tag-pic">'+
+                '<button type="submit">Marcar</button><button type="reset">Sair</button></div>'+
                 '</form>'
                 );
 
@@ -54,7 +54,14 @@ function init() {
         viewer.viewport.fitBounds(rect);
         viewer.viewport.ensureVisible();
         viewer.drawer.addOverlay(div, rect);
-        markers.push(rect);
+        mark = {'x':    x,
+                'y':    y,
+                'name': $("#tag-name").val(),
+                'desc': $("#tag-desc").val(),
+                'birth':$("#tag-birth").val(),
+                'pic':  $("#tag-pic").val()
+        }
+        markers.push(mark);
         return false;
     });
 
@@ -201,7 +208,6 @@ function init() {
     function closeTagInput() {
         $("#tag-target").fadeOut();
         $("#tag-input").fadeOut();
-        $("#tag-name").val("");
     }
 
     function removeTag(i) {
