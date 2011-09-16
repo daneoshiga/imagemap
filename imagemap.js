@@ -65,8 +65,8 @@ function init() {
         div.onmousehover = function () { markerOnHover(rect)};
         div.onmouseclick = function () { markerOnClick(rect)};
 
-        viewer.viewport.fitBounds(rect);
-        viewer.viewport.ensureVisible();
+        //viewer.viewport.fitBounds(rect);
+        //viewer.viewport.ensureVisible();
         viewer.drawer.addOverlay(div, rect);
 
         mark = {'x':     x,
