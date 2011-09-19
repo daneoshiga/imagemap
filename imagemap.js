@@ -10,6 +10,7 @@ function init() {
     var jsonurl = 'oldermarks.json';    // url of file to load previous marks json data
     var postmarks = 'save.php';         // url to save the marks
     SeadragonConfig.zoomPerClick = 1;   //avoid zooming on click
+    SeadragonConfig.imagePath = './vendor/seadragon-ajax/img/';
 
     var tracker = new Seadragon.MouseTracker(container);
 
