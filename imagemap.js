@@ -43,13 +43,24 @@ function init() {
     $('#tag-form').submit(function() {
         //handles the form submition, pass all values to function createMark
 
-        createMark($("#tag-x").val(),
-                    $("#tag-y").val(),
-                    $("#tag-name").val(),
-                    $("#tag-desc").val(),
-                    $("#tag-birth").val(),
-                    $("#tag-pic").val()
+        mark = {'x':     $("#tag-x").val(),
+                'y':     $("#tag-y").val(),
+                'name':  $("#tag-name").val(),
+                'desc':  $("#tag-desc").val(),
+                'birth': $("#tag-birth").val(),
+                'pic':   $("#tag-pic").val()
+        }
+
+        createMark(mark.x,
+                    mark.y,
+                    mark.name,
+                    mark.desc,
+                    mark.birth,
+                    mark.pic
                     );
+
+        //ajax call to send mark to handler to persist it
+        $.post(postmarks, mark);
         return false;
     });
 
@@ -82,9 +93,6 @@ function init() {
                 'pic':   pic
         }
 
-        //TODO add function to deal with name, desc, birth and pic
-        //TODO add function to send the mark to db (ajax?)
-        //$.post(postmarks, mark);
         markers.push(mark);
     }
 
