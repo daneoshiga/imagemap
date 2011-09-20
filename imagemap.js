@@ -62,11 +62,9 @@ function init() {
             width, height);
 
         div.className = "overlay";
-        div.innerHTML = "<img src='"+pic+"'>"+
-                            "<ul class='dados'>"+
+        div.innerHTML = "<ul class='dados'>"+
                             "<li>"+name+"</li>"+
-                            "<li>"+desc+"</li>"+
-                            "<li>"+birth+"</li>";
+                            "<li>"+desc+"</li>";
 
         // adds mouse events to the marker
         div.onmousehover = function () { markerOnHover(rect)};
